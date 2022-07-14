@@ -157,8 +157,15 @@ type ProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	Annotations map[string]*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ClusterID *string `json:"clusterId" tf:"cluster_id,omitempty"`
+	// +crossplane:generate:reference:type=Cluster
+	// +kubebuilder:validation:Optional
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	ContainerResourceLimit []ProjectContainerResourceLimitParameters `json:"containerResourceLimit,omitempty" tf:"container_resource_limit,omitempty"`
@@ -173,6 +180,9 @@ type ProjectParameters struct {
 	// Labels of the resource
 	// +kubebuilder:validation:Optional
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PodSecurityPolicyTemplateID *string `json:"podSecurityPolicyTemplateId,omitempty" tf:"pod_security_policy_template_id,omitempty"`

@@ -19,6 +19,8 @@ import (
 
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+
+	"github.com/crossplane-contrib/provider-jet-rancher/config/project"
 )
 
 const (
@@ -46,6 +48,7 @@ func GetProvider() *tjconfig.Provider {
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
+		project.Configure,
 	} {
 		configure(pc)
 	}

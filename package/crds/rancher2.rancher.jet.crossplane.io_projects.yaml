@@ -70,6 +70,29 @@ spec:
                     type: object
                   clusterId:
                     type: string
+                  clusterIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  clusterIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   containerResourceLimit:
                     items:
                       properties:
@@ -93,6 +116,8 @@ spec:
                       type: string
                     description: Labels of the resource
                     type: object
+                  name:
+                    type: string
                   podSecurityPolicyTemplateId:
                     type: string
                   projectMonitoringInput:
@@ -183,7 +208,7 @@ spec:
                     description: Wait for cluster becomes active
                     type: boolean
                 required:
-                - clusterId
+                - name
                 type: object
               providerConfigRef:
                 default:

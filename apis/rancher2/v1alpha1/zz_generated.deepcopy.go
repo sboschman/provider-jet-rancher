@@ -7757,6 +7757,16 @@ func (in *ProjectParameters) DeepCopyInto(out *ProjectParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ContainerResourceLimit != nil {
 		in, out := &in.ContainerResourceLimit, &out.ContainerResourceLimit
 		*out = make([]ProjectContainerResourceLimitParameters, len(*in))
@@ -7788,6 +7798,11 @@ func (in *ProjectParameters) DeepCopyInto(out *ProjectParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
 	}
 	if in.PodSecurityPolicyTemplateID != nil {
 		in, out := &in.PodSecurityPolicyTemplateID, &out.PodSecurityPolicyTemplateID
